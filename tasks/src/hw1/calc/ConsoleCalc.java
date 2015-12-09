@@ -2,6 +2,14 @@ package hw1.calc;
 
 import java.util.Scanner;
 
+/*
+* Написать калькулятор в виде консольного меню
+	- сложение двух чисел
+	- вычитание двух чисел
+	- умножение двух чисел
+	- деление двух чисел
+* */
+
 public class ConsoleCalc {
 
     private static double fistValue;

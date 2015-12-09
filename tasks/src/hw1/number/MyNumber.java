@@ -98,6 +98,33 @@ public class MyNumber {
         }
     }
 
+    public int compareToNumbers(Object obj) {
+        MyNumber temp = (MyNumber)obj;
+        int result = Integer.compare((int)value, (int)temp.value);
+        if (result != 0) {
+            return (int) result / Math.abs(result);
+        }
+        return 0;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!super.equals(obj)) {
+            return false;
+        }
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (this.getClass() != obj.getClass()) {
+            return false;
+        }
+        MyNumber temp = (MyNumber)obj;
+        return this.value == temp.value;
+    }
+
     @Override
     public String toString() {
         return String.valueOf(getNumber());

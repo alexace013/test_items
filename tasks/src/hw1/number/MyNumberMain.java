@@ -17,8 +17,8 @@ public class MyNumberMain {
         number.setNumber(9.5);
         System.out.println("сравнение двух чисел: " + number.comparingToNumbers(7.9));
 
-
-
+        MyNumber number2 = new MyNumber(9.0);
+        System.out.println("сравнение двух чисел (int значение): " + number.compareToNumbers(number2));
 
     }
 

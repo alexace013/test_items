@@ -22,13 +22,13 @@ public class Student {
     private int index;
 
     public Student() {
-        subjects = new Subject[3];
+        subjects = new Subject[0];
     }
 
-    public Student(String name, String address, int countSubjects) {
+    public Student(String name, String address, int sizeSubjects) {
         this.name = name;
         this.address = address;
-        this.subjects = new Subject[countSubjects];
+        subjects = new Subject[sizeSubjects];
     }
 
     public void learn(int hours, int subIdx) {

@@ -11,7 +11,7 @@ public class StudentMain {
         Subject subject2 = new Subject("Physics", 240);
         Subject subject3 = new Subject("Programming", 360);
 
-        Student student = new Student("Bob", "New Oklahoma", 5);
+        Student student = new Student("Bob", "New Oklahoma", 3);
         student.addSubject(subject1);
         student.addSubject(subject2);
         student.addSubject(subject3);

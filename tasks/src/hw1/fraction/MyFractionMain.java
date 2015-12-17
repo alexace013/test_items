@@ -24,16 +24,16 @@ public class MyFractionMain {
 //        MyFraction f2 = new MyFraction(2, 5);
 //
 //        MyFraction addFrac1 = f1.add(f2);
-//        System.out.println(addFrac1.toString());
+//        System.out.println(addFrac1.asString());
 //
 //        MyFraction subFrac1 = f1.sub(f2);
-//        System.out.println(subFrac1.toString());
+//        System.out.println(subFrac1.asString());
 //
 //        MyFraction mulFrac1 = f1.mul(f2);
-//        System.out.println(mulFrac1.toString());
+//        System.out.println(mulFrac1.asString());
 //
 //        MyFraction divFrac1 = f1.div(f2);
-//        System.out.println(divFrac1.toString());
+//        System.out.println(divFrac1.asString());
 
 
     }

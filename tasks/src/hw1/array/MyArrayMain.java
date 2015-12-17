@@ -1,63 +1,53 @@
 package hw1.array;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-
+/**
+ * Created by alexander on 17.12.15.
+ */
 public class MyArrayMain {
-
-    private static MyArray<Integer> array;
 
     public static void main(String[] args) {
 
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        System.out.print("input array size: ");
-        String input = null;
-        try {
-            input = reader.readLine();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        int value = Integer.parseInt(input);
-        array = new MyArray<>(value);
-        random();
-        printArray();
-        System.out.println("\nminimum: " + minimumValue());
-        System.out.println("maximum: " + maximumValue());
+        MyArray array1 = new MyArray();
 
-    }
+        array1.addElement(5);
+        array1.addElement(10);
+        array1.addElement(20);
+        array1.addElement(30);
+        array1.addElement(40);
+        array1.addElement(50);
+        array1.addElement(60);
+        array1.addElement(70);
+        array1.addElement(80);
+        array1.addElement(90);
+//        array1.addElement(100);
+        System.out.println("array1: " + array1.asString());
+        System.out.println("max = " + array1.maximumValue() + "\nmin = " + array1.minimumValue());
+        System.out.println("=============================");
+        MyArray array2 = new MyArray(3);
+        array2.addElement(7);
+        array2.addElement(8);
+        array2.addElement(9);
+        System.out.println("array2: " + array2.asString());
+        System.out.println("=============================");
+        MyArray array3 = new MyArray(50);
+        array3.random(100);
+        System.out.println("array3: " + array3.asString());
+        array3.bubbleSort();
+        System.out.println("array3 - bubble sort: " + array3.asString());
+        System.out.println("=============================");
+        MyArray array4 = new MyArray();
+        array4.random(15);
+        System.out.println("array4: " + array4.asString());
+        array4.selectionSort();
+        System.out.print("array4 - selection sort: " + array4.asString());
+        System.out.println("\n=============================");
+        MyArray array5 = new MyArray(17);
+        array5.random(87);
+        System.out.println("array5: " + array5.asString());
+        array5.sort();
+        System.out.println("Arrays.sort(int[] array) - array5: " + array5.asString());
 
-    public static void random() {
-        for (int i = 0; i < array.length(); i++) {
-            int random = (int)(Math.random() * 100);
-            array.setElement(i, random);
-        }
-    }
 
-    public static int minimumValue() {
-        int min = array.getElement(0);
-        for (int i = 0; i < array.length(); i++) {
-            if (min > array.getElement(i)) {
-                min = array.getElement(i);
-            }
-        }
-        return min;
-    }
-
-    public static int maximumValue() {
-        int max = array.getElement(0);
-        for (int i = 0; i < array.length(); i++) {
-            if (max < array.getElement(i)) {
-                max = array.getElement(i);
-            }
-        }
-        return max;
-    }
-
-    public static void printArray() {
-        for (int i = 0; i < array.length(); i++) {
-            System.out.print(array.getElement(i) + " ");
-        }
     }
 
 }

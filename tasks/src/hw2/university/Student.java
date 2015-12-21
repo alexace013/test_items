@@ -41,16 +41,25 @@ public class Student {
         index++;
     }
 
+    public void removeLastSubject() {
+        subjects[index] = null;
+        index--;
+    }
+
     public String getSubjectsInfo() {
-        String str = null;
+        StringBuilder builder = new StringBuilder();
         for (int i = 0; i < index; i++) {
-            str = subjects[i].getSubjectInfo();
+            builder.append(subjects[i].getSubjectInfo() + "\n");
         }
-        return str;
+        return builder.toString();
     }
 
     public double getAverageSubjects() {
-        return 0;
+        double result = 0;
+        for (Subject subject : subjects) {
+            result += subject.getRank();
+        }
+        return result / subjects.length;
     }
 
 }

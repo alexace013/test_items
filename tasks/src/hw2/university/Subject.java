@@ -15,29 +15,37 @@ package hw2.university;
 public class Subject {
 
     private String name;
-    private int allHours;
+    private int semesterHours;
     private int studentHours;
     private int rank;
 
     public Subject() {}
 
-    public Subject(String name, int allHours) {
+    public Subject(String name, int semesterHours) {
         this.name = name;
-        this.allHours = allHours;
+        this.semesterHours = semesterHours;
         studentHours = 0;
     }
 
     public Subject(String name, int allHours, int studentHours) {
         this.name = name;
-        this.allHours = allHours;
+        this.semesterHours = allHours;
         this.studentHours = studentHours;
     }
 
     // take exam
     public void exams() {
-        double result = allHours / studentHours;
-        setRank((int)result);
-        if (rank < 2) {
+        double result = semesterHours / studentHours;
+        if (result == 1) {
+            setRank(5);
+        } else if (result <= 1.5) {
+            setRank(4);
+        } else if (result <= 2) {
+            setRank(3);
+        } else {
+            setRank(2);
+        }
+        if (rank > 3) {
             System.out.println("subject completed.");
         } else {
             System.err.println("subject no completed.");
@@ -46,7 +54,7 @@ public class Subject {
 
     // subject information
     public String getSubjectInfo() {
-        return "subject name: " + name + ", hours of subject : " + allHours;
+        return String.format("%s, %s", name, semesterHours);
     }
 
     // score per subject

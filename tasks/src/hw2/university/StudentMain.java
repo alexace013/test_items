@@ -16,6 +16,16 @@ public class StudentMain {
         student.addSubject(subject2);
         student.addSubject(subject3);
         System.out.println(student.getSubjectsInfo());
+        student.learn(90, 0);
+        student.learn(170, 1);
+        student.learn(250, 2);
+        subject1.exams();
+        System.out.println(subject1.getRank());
+        subject2.exams();
+        System.out.println(subject2.getRank());
+        subject3.exams();
+        System.out.println(subject3.getRank());
+        System.out.println(student.getAverageSubjects());
 
     }
 

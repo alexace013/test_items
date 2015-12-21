@@ -1,4 +1,4 @@
-package parking;
+package hw2.parking;
 
 /**
  * class Biker

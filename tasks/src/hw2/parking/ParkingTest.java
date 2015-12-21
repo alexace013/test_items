@@ -1,4 +1,4 @@
-package parking;
+package hw2.parking;
 
 /**
  * Created by alexander on 21.12.15.

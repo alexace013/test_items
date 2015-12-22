@@ -20,7 +20,7 @@ import java.util.Map;
 public class Parking {
 
     private final int AMOUNT;
-    private Map<Integer, Bike> places = new HashMap<>();
+    private Map<Integer, Biker> places = new HashMap<>();
     private Integer numberPlace;
     private Integer busy = 0;
     private int size;
@@ -34,12 +34,13 @@ public class Parking {
     }
 
     public void addBikeByPlaceNumber(int numberPlace) {
+        places.put(numberPlace, new Biker("DEFAULT"));
         this.numberPlace = numberPlace;
 
 
     }
 
-    public int addBikeOnLastFreePlace(Bike bike) throws ParkingFullException {
+    public int addBikeOnLastFreePlace(Biker biker) throws ParkingFullException {
 
         if (size == AMOUNT) {
             throw new ParkingFullException("no place.");
@@ -47,8 +48,8 @@ public class Parking {
 
         for (int i = 1; i <= AMOUNT; i++) {
             if (places.get(i) == null) {
-                places.put(i, bike);
-                bike.setParkPlace(i);
+                places.put(i, biker);
+                biker.setParkPlace(i);
                 size++;
                 busy++;
                 break;
@@ -59,7 +60,7 @@ public class Parking {
 
     }
 
-    public Bike takeLastBike() {
+    public Biker takeLastBike() {
 
         numberPlace = places.size();
 
@@ -67,30 +68,27 @@ public class Parking {
             throw new IndexOutOfBoundsException("place is empty");
         }
 
-        Bike bike = places.get(numberPlace);
-        bike.setParkPlace(null);
+        Biker biker = places.get(numberPlace);
+        biker.setParkPlace(null);
         places.put(numberPlace, null);
         size--;
         busy--;
-        System.out.println(String.format("bike %s takes from %d", bike.getBrand(), numberPlace));
+        System.out.println(String.format("bike %s takes from %d", biker.getBrand(), numberPlace));
 
-        return bike;
+        return biker;
     }
 
+    // append method
     public int clearGaragePlaces() {
-        for (int i = places.size(); i >= 0; i--) {
-            places.remove(i, null);
-        }
-        size = 0;
-        busy = 0;
-        return places.size();
+        return 0;
     }
 
     public String showAllInGarage() {
 
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i < places.size(); i++) {
-            builder.append(String.format("%d. brand:  %s, park place: %s\n", places.get(i), places.get(i).getBrand(), places.get(i).getParkPlace()));
+            builder.append(String.format("brand:  %s, park place.\n",
+                    places.get(i).getBrand()));
         }
         return builder.toString();
     }
@@ -117,6 +115,10 @@ public class Parking {
             super(idxExeption);
         }
 
+    }
+
+    public int getSize() {
+        return size;
     }
 
 }

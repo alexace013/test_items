@@ -7,17 +7,20 @@ public class Book {
     private final AtomicInteger BOOK_ID = new AtomicInteger((int)(Math.random() * this.hashCode()));
     private String bookName;
     private String author;
+    private int year;
     private boolean bookShelf;
 
     public Book() {
         bookName = "DEFAULT BOOK";
         author = "DEFAULT AUTHOR";
         bookShelf = true;
+        year = 2000;
     }
 
-    public Book(String bookName, String author) {
+    public Book(String bookName, String author, int year) {
         this.bookName = bookName;
         this.author = author;
+        this.year = year;
         bookShelf = true;
     }
 
@@ -39,5 +42,9 @@ public class Book {
 
     public void setBookShelf(boolean bookShelf) {
         this.bookShelf = bookShelf;
+    }
+
+    public int getYear() {
+        return year;
     }
 }

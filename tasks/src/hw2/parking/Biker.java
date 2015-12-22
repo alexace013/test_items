@@ -8,14 +8,14 @@ package hw2.parking;
  - fixMotorcycle
  */
 
-public class Bike {
+public class Biker {
 
     private String brand;
     private Integer parkPlace;
 
-    public Bike() {}
+    public Biker() {}
 
-    public Bike(String brand) {
+    public Biker(String brand) {
         this.brand = brand;
     }
 

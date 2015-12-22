@@ -12,16 +12,19 @@ public class Reader {
     private final int MAX_BOOKS_SIZE = 2; // the maximum number of books that can take the reader
     private int index = 0;
     private boolean freeBook = checkPlace(); // free or busy book
+    private boolean issuingBook;
 
     // DEFAULT constructor
     public Reader() {
         readerName = "DEFAULT READER";
         books = new ArrayList<Book>(MAX_BOOKS_SIZE);
+        issuingBook = true;
     }
 
     public Reader(String readerName) {
         this.readerName = readerName;
         books = new ArrayList<Book>(MAX_BOOKS_SIZE);
+        issuingBook = true;
     }
 
     public String getReaderName() {
@@ -54,6 +57,10 @@ public class Reader {
 
     // method add book to the list of reader
     public void addBook(Book book) {
+        if (!isIssuingBook()) {
+            System.out.println("Your add to black list.");
+            return;
+        }
         if (checkPlace()) {
             book.setBookShelf(false);
             books.add(book);
@@ -79,5 +86,13 @@ public class Reader {
 
     public boolean isFreeBook() {
         return freeBook;
+    }
+
+    public void setIssuingBook(boolean issuingBook) {
+        this.issuingBook = issuingBook;
+    }
+
+    public boolean isIssuingBook() {
+        return issuingBook;
     }
 }

@@ -1,20 +1,11 @@
 package hw3.railwayCashbox.place;
 
-/*class Place saved info:
- * 1. number
- * 2. type
- * 3. price
- * */
 public class Place {
 
     private int placeNumber;
     private double placePrice;
     private String placeType;
-    private boolean ticketBuy = true; // if true, ticket  can be purchased
-
-    // DEFAULT constructor
-    public Place() {
-    }
+    private boolean ticketBuy = true;   // if true, ticket  can be purchased
 
     public Place(String placeType, int placeNumber, double placePrice) {
         this.placeType = placeType;

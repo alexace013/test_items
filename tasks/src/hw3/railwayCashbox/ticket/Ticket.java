@@ -1,5 +1,10 @@
 package hw3.railwayCashbox.ticket;
 
+import utils.DateAndTime;
+
+import java.time.LocalDateTime;
+import java.util.Random;
+
 /**
  *  Билет содержит следующие поля:
  *  1. Пункт отбытия
@@ -10,6 +15,7 @@ package hw3.railwayCashbox.ticket;
  *  6. Номер места
  *  7. Цена
  */
+
 public class Ticket {
 
     private int id;
@@ -22,18 +28,19 @@ public class Ticket {
     private int placeNumber;
     private double price;
 
-    public Ticket(String startStation, String endStation,
+    public Ticket(int trainNumber, String startStation, String endStation,
                   int year, int month, int day, int hours, int minutes,
-                  int trainNumber, int carriageNumber, int placeNumber,
+                  int carriageNumber, int placeNumber,
                   double price) {
+        this.trainNumber = trainNumber;
         this.startStation = startStation;
         this.endStation = endStation;
         this.dateAndTime = new DateAndTime(year, month, day, hours, minutes);
-        this.trainNumber = trainNumber;
         this.carriageNumber = carriageNumber;
         this.placeNumber = placeNumber;
         this.price = price;
-        this.id = (int)(Math.random() * hashCode());
+//        this.id = (int)(Math.random() * hashCode());
+        this.id = new Random(1075).nextInt() * (int)(Math.random() * 1721);
     }
 
     public int getId() {
@@ -100,8 +107,14 @@ public class Ticket {
         this.price = price;
     }
 
-    public String getDateAndTime() {
-        return dateAndTime.toString();
+    public void setDateAndTime(DateAndTime dateAndTime) {
+        this.dateAndTime = dateAndTime;
     }
 
+    public DateAndTime getDateAndTime() {
+        return dateAndTime;
+    }
+
+    public void setDateAndTime(LocalDateTime dateTime) {
+    }
 }

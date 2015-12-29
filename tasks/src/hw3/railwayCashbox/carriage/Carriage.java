@@ -1,15 +1,14 @@
 package hw3.railwayCashbox.carriage;
 
 import hw3.railwayCashbox.place.Place;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class Carriage {
 
+    public List<Place> places = new ArrayList<Place>();
     private int carriageNumber;
     private String carriageType;
-    List<Place> places = new ArrayList<Place>();
 
     public int getCarriageNumber() {
         return carriageNumber;
@@ -28,9 +27,12 @@ public class Carriage {
     }
 
     public int getPlaceSize() {
-        return  places.size();
+        return places.size();
     }
 
+    /**
+     * @return String - all information about places
+     */
     public String getAllPlacesToString() {
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i < places.size(); i++) {

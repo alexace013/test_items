@@ -5,13 +5,13 @@ package hw2.parking;
            methods
            - addMotoOnLastFreePlace +
            - takeLastMoto +
-           - addMotoByPlaceNumber
-           - takeMotoByPlaceNumber
+           - addMotoByPlaceNumber +
+           - takeMotoByPlaceNumber +
            - clearGaragePlaces +
-           - open
-           - close
+           - open +
+           - close +
            - changeAddress
-           - showAllInGarage
+           - showAllInGarage +
 * */
 
 import java.util.HashMap;
@@ -20,10 +20,11 @@ import java.util.Map;
 public class Parking {
 
     private final int AMOUNT;
-    private Map<Integer, Biker> places = new HashMap<>();
+    private Map<Integer, Motorcycle> places = new HashMap<>();
     private Integer numberPlace;
     private Integer busy = 0;
     private int size;
+    private boolean isWork;
 
     public Parking() {
         AMOUNT = 7;
@@ -33,14 +34,45 @@ public class Parking {
         this.AMOUNT = amount;
     }
 
-    public void addBikeByPlaceNumber(int numberPlace) {
-        places.put(numberPlace, new Biker("DEFAULT"));
-        this.numberPlace = numberPlace;
+    public int getSize() {
+        return size;
+    }
 
+    public void open() {
+        isWork = true;
+    }
+
+    public void close() {
+        isWork = false;
+    }
+
+    public void addMotoByPlaceNumber(int numberPlace, Motorcycle motorcycle) {
+
+        if (!controlParkingWork()) {
+            return;
+        }
+
+        if (places.get(numberPlace) == null) {
+
+            places.put(numberPlace, motorcycle);
+            this.numberPlace = numberPlace;
+            motorcycle.setParkPlace(numberPlace);
+            busy++;
+            size++;
+
+        } else {
+
+            System.out.println("this place number is busy.");
+
+        }
 
     }
 
-    public int addBikeOnLastFreePlace(Biker biker) throws ParkingFullException {
+    public int addMotoOnLastFreePlace(Motorcycle motorcycle) throws ParkingFullException {
+
+        if (!controlParkingWork()) {
+            return - 1;
+        }
 
         if (size == AMOUNT) {
             throw new ParkingFullException("no place.");
@@ -48,8 +80,8 @@ public class Parking {
 
         for (int i = 1; i <= AMOUNT; i++) {
             if (places.get(i) == null) {
-                places.put(i, biker);
-                biker.setParkPlace(i);
+                places.put(i, motorcycle);
+                motorcycle.setParkPlace(i);
                 size++;
                 busy++;
                 break;
@@ -60,7 +92,13 @@ public class Parking {
 
     }
 
-    public Biker takeLastBike() {
+    public Motorcycle takeLastBike() {
+
+        if (!controlParkingWork()) {
+            return null;
+        }
+
+        controlParkingSize();
 
         numberPlace = places.size();
 
@@ -68,29 +106,74 @@ public class Parking {
             throw new IndexOutOfBoundsException("place is empty");
         }
 
-        Biker biker = places.get(numberPlace);
-        biker.setParkPlace(null);
-        places.put(numberPlace, null);
+        Motorcycle motorcycle = places.get(numberPlace);
+        motorcycle.setParkPlace(null);
+        places.remove(numberPlace);
         size--;
         busy--;
-        System.out.println(String.format("bike %s takes from %d", biker.getBrand(), numberPlace));
+        System.out.println(String.format("bike %s takes from %d place",
+                motorcycle.getBrand(), numberPlace));
 
-        return biker;
+        return motorcycle;
+
     }
 
-    // append method
+    public Motorcycle takeMotoByPlaceNumber(int numberPlace) {
+
+        if (!controlParkingWork()) {
+            return null;
+        }
+
+        controlParkingSize();
+
+        if (numberPlace > places.size()) {
+            throw new IndexOutOfBoundsException("your index is fail");
+        } else if (places.get(numberPlace) == null) {
+            throw new NullPointerException("place is empty");
+        }
+
+        Motorcycle motorcycle = places.get(numberPlace);
+        motorcycle.setParkPlace(null);
+        places.remove(numberPlace);
+        size--;
+        busy--;
+        System.out.println(String.format("bike %s takes from %d place",
+                motorcycle.getBrand(), numberPlace));
+
+        return motorcycle;
+
+    }
+
     public int clearGaragePlaces() {
-        return 0;
+
+        if (!controlParkingWork()) {
+            return - 1;
+        }
+
+        places.clear();
+        size = 0;
+        busy = 0;
+
+        return places.size();
     }
 
     public String showAllInGarage() {
 
-        StringBuilder builder = new StringBuilder();
-        for (int i = 0; i < places.size(); i++) {
-            builder.append(String.format("brand:  %s, park place.\n",
-                    places.get(i).getBrand()));
+        if (!controlParkingWork()) {
+            return null;
         }
+
+        StringBuilder builder = new StringBuilder();
+
+        for (Motorcycle motorcycle : places.values()) {
+            if (places.values().iterator().hasNext()) {
+                builder.append(String.format("brand: %s, place: %d\n",
+                        motorcycle.getBrand(), motorcycle.getParkPlace()));
+            }
+        }
+
         return builder.toString();
+
     }
 
     private void controlParkingSize() {
@@ -99,11 +182,18 @@ public class Parking {
         }
     }
 
+    private boolean controlParkingWork() {
+        if (isWork == false) {
+            System.err.println("sorry, parking is close.");
+            return false;
+        }
+        return true;
+    }
+
     @Override
     public String toString() {
         return String.format("Parking have: \nplaces: %d\nbusy: %d\namount: %d", places, busy, AMOUNT);
     }
-
 
     public class ParkingFullException extends Exception {
 
@@ -115,10 +205,6 @@ public class Parking {
             super(idxExeption);
         }
 
-    }
-
-    public int getSize() {
-        return size;
     }
 
 }

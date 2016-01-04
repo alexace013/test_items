@@ -15,7 +15,7 @@ import java.time.LocalDate;
 
 public interface CashBoxI {
 
-    void allTicketsInfo(LocalDate date, int trainNumber);
+    void allTrainTicketsInformation(LocalDate date, int trainNumber);
     Ticket ticketInfo();
     boolean buyTicket(double price);
     boolean passTicket();

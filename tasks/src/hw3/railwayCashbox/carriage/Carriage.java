@@ -30,6 +30,11 @@ public class Carriage {
         return places.size();
     }
 
+
+    public Place getPlace(int index) {
+        return places.get(index);
+    }
+
     /**
      * @return String - all information about places
      */

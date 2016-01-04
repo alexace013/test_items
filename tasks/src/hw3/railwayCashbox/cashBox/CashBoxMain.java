@@ -21,7 +21,8 @@ public class CashBoxMain {
         }
         CashBox cashBox = new CashBox((ArrayList<Train>) trains);
         LocalDate testDate = LocalDate.of(2015, 12, 31);
-        cashBox.allTicketsInfo(testDate, 3);
+//        cashBox.allTicketsInfo(testDate, 3);
+        cashBox.allTrainTicketsInformation(testDate, 2);
 
 
     }

@@ -7,6 +7,7 @@ package hw3.railwayCashbox.cashBox;
     Купить билеты можно начиная с 45 суток до отправления, до момента отправления
 * */
 
+import hw3.railwayCashbox.place.Place;
 import hw3.railwayCashbox.ticket.Ticket;
 import hw3.railwayCashbox.train.Train;
 import utils.DateAndTime;
@@ -85,43 +86,84 @@ public class CashBox implements CashBoxI {
 
     // Узнать информацию о всех билетах
     @Override
-    public void allTicketsInfo(LocalDate date, int trainNumber) {
+    public void allTrainTicketsInformation(LocalDate date, int trainNumber) {
+
+//        for (Train train : trains) {
+//
+//            if (train.getTrainNumber() == trainNumber) {
+//
+//                System.out.printf("Train %d %s - %s %d.%d.%d \n",
+//                        train.getTrainNumber(), train.getStartStation(), train.getEndStation(),
+//                        date.getMonth().getValue(), date.getDayOfMonth(), date.getYear());
+//
+//                for (int i = 0; i < train.carriages.length; i++) {
+//
+//                    System.out.printf("\n(%d) %s ", i + 1, train.carriages[i].getCarriageType());
+//
+//                    for (int j = 0; j < train.carriages[i].places.size(); j++) {
+//
+//                        for (Ticket ticket : tickets) {
+//
+//                            if ((ticket.getTrainNumber() == trainNumber) &&
+//                                    (ticket.getDateAndTime().getDay() == date.getDayOfMonth() && ticket.getDateAndTime().getMonth() == date.getMonth())
+//                                    && (ticket.getCarriageNumber() == i + 1) && (ticket.getPlaceNumber() == j + 1)) {
+//
+//                                if (ticket.isFreePlace()) {
+//                                    System.out.printf("%d ", ticket.getPlaceNumber());
+//                                } else {
+//                                    System.out.print("- ");
+//                                }
+//
+//                            }
+//
+//                        }
+//
+//                    }
+//
+//                }
+//
+//            }
+//
+//        }
 
         for (Train train : trains) {
 
-            if (train.getTrainNumber() == trainNumber) {
+            if (trainNumber == train.getTrainNumber() &&
+                    (date.getYear() == train.getDate().getYear() &&
+                            date.getMonth().getValue() == train.getDate().getMonth().getValue() &&
+                            date.getDayOfMonth() == train.getDate().getDayOfMonth())) {
+                System.out.println(String.format("Train №%d, from \"%s\" to \"%s\"",
+                        train.getTrainNumber(), train.getStartStation(), train.getEndStation()));
 
-                System.out.println(String.format("Train %d, %s - %s, %d.%d.%d, %d:%d\n",
-                        train.getTrainNumber(), train.getStartStation(), train.getEndStation(),
-                        train.getDate().getYear(), train.getDate().getDayOfMonth(),
-                        train.getDate().getMonth().getValue(), train.getTime().getHour(),
-                        train.getTime().getMinute()));
 
                 for (int i = 0; i < train.getCarriages().length; i++) {
 
-                    System.out.println(String.format("(%d)%s ", i + 1,
-                            train.carriages[i].getCarriageType()));
+                    for (Place place : trains.get(trainNumber).carriages[i].places) {
 
-                    for (int j = 0; j < train.carriages[i].places.size(); j++) {
-
-                        for (Ticket ticket : tickets) {
-
-                            if (ticket.getTrainNumber() == trainNumber) {
-
-                                if (ticket.isFreePlace()) {
-
-                                    System.out.println(String.format("place %d ", ticket.getPlaceNumber()));
-
-                                }
-
-                            } else {
-                                System.out.print("- ");
-                            }
+                        if (trains.get(i).getCarriage(i).getPlace(i).isTicketBuy()) {
+                            System.out.println(String.format("place №%d is free.", trains.get(i).getCarriage(i).getPlace(i).getPlaceNumber()));
+                        } else {
+                            System.out.println(String.format("%s", null));
                         }
+
                     }
+
                 }
+
             }
+
+//            System.out.println(String.format("train №%s", train.getTrainNumber()));
+
+//            for (int i = 0; i < trains.size(); i++) {
+//                if (trains.get(i).getCarriage(i).getPlace(i).isTicketBuy()) {
+//                    System.out.println(String.format("place №%d is free.", trains.get(i).getCarriage(i).getPlace(i).getPlaceNumber()));
+//                } else {
+//                    System.out.println(String.format("%s", null));
+//                }
+//            }
+
         }
+
     }
 
     // Узнать информацию о билете (номер поезда, дата отправления, вагон, место)

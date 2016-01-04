@@ -111,6 +111,10 @@ public class Train implements ConditionTrain {
         this.date = date;
     }
 
+    public Carriage getCarriage(int index) {
+        return carriages[index];
+    }
+
     /**
      * @param index - input the index to show a carriage with an array(@param carriages)
      * @return int -  the places size in this carriage

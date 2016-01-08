@@ -39,11 +39,14 @@ public class ArrayStack<E> implements Stack {
     }
 
     @Override
-    public void pop() {
+    public E pop() {
         if (first == -1) {
             throw new StackException("stack is empty");
         }
         first--;
+        E element = array[first];
+        array[first] = null;
+        return element;
     }
 
     @Override

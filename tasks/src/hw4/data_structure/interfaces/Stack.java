@@ -4,7 +4,7 @@ public interface Stack<E> {
 
     void push(E element);
     E peek();
-    void pop();
+    E pop();
     boolean isEmpty();
 
 }
